@@ -1,0 +1,50 @@
+@if (!entrenadorActivo()) {
+  <div class="notice-box">
+    <h3>No hay entrenador</h3>
+    <p>
+      Por favor asigna un <strong>entrenador activo</strong> o <strong>registra un entrenador</strong>.
+    </p>
+  </div>
+} @else {
+  <div class="page-wrap card-surface">
+    <header>
+      <h2>Mochila de {{ entrenadorActivo()?.nombreCompleto }}</h2>
+    </header>
+
+    <div class="pokemon-grid">
+      @if (mochilaActual().length > 0) {
+        @for (poke of mochilaActual(); track poke.id; let index = $index) {
+          <div class="pokemon-card" [class.is-favorite]="poke.esFavorito" [appResaltarTipoPokemon]="poke.type">
+            <span class="card-index">
+              #{{ index + 1 }} de {{ mochilaActual().length }}
+            </span>
+            <img class="pokemon-sprite" [src]="poke.image" [alt]="poke.name" />
+            <div class="pokemon-name">{{ poke.name }}</div>
+            <div class="pokemon-types">
+              <span class="type-chip" [class]="'type-' + poke.type">{{ poke.type }}</span>
+            </div>
+            <div class="panel-botones">
+              <button
+                type="button"
+                class="btn btn-sm"
+                [class.btn-primary]="poke.esFavorito"
+                [class.btn-secondary]="!poke.esFavorito"
+                (click)="actualizarFavorito(poke.id)"
+              >
+                {{ poke.esFavorito ? '⭐ Favorito' : '☆ Marcar' }}
+              </button>
+              <button type="button" class="btn btn-danger btn-sm" (click)="eliminarPokemon(poke.id)">
+                Liberar
+              </button>
+            </div>
+          </div>
+        }
+      } @else {
+        <div class="empty-state">
+          <p>Tu mochila está vacía por ahora.</p>
+          <p>Ve a "Buscar Pokémon" y captura alguno.</p>
+        </div>
+      }
+    </div>
+  </div>
+}

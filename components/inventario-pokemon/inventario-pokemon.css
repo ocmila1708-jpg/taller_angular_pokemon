@@ -1,0 +1,256 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=DM+Sans:wght@400;500;700&display=swap');
+
+:host {
+  display: block;
+  --rosa-oscuro: #c2185b;
+  --rosa-medio: #ec4899;
+  --rosa-claro: #f9a8d4;
+  --rosa-pastel: #fce7f3;
+  --blanco: #ffffff;
+  --blanco-humo: #fffafc;
+  --dorado: #ffd166;
+  --gris-texto: #4a2438;
+}
+
+/* ---------- Página ---------- */
+.inventario {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 56px 24px 72px;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  color: var(--gris-texto);
+  background:
+    radial-gradient(circle at 90% 8%, rgba(255, 255, 255, 0.5), transparent 40%),
+    radial-gradient(circle at 10% 90%, rgba(255, 255, 255, 0.35), transparent 45%),
+    linear-gradient(200deg, var(--rosa-claro), var(--rosa-medio));
+}
+
+/* ---------- Encabezado ---------- */
+.encabezado {
+  max-width: 220px;
+  margin: 0 auto 40px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: linear-gradient(120deg, var(--rosa-medio), var(--rosa-oscuro));
+  border-radius: 999px;
+  box-shadow: 0 10px 20px rgba(194, 24, 91, 0.3);
+}
+
+.encabezado h2 {
+  margin: 0;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: var(--blanco);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Mochila pequeña y tierna junto al título, generada solo con CSS */
+.encabezado h2::before {
+  content: '🎒';
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  font-size: 0.55rem;
+  vertical-align: middle;
+  background: var(--blanco);
+  border-radius: 999px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* El badge de "Total almacén" se quitó del diseño. */
+.total {
+  display: none;
+}
+
+/* ---------- Grilla ---------- */
+.grid-pokemon {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 26px;
+}
+
+/* ---------- Estado vacío ---------- */
+.sin-datos {
+  grid-column: 1 / -1;
+  padding: 48px 24px;
+  text-align: center;
+  border: 2px dashed var(--blanco);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.25);
+  color: var(--blanco);
+}
+
+.sin-datos p {
+  margin: 0;
+}
+
+.sin-datos p:first-child {
+  margin-bottom: 8px;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1.3rem;
+}
+
+.sin-datos p:last-child {
+  opacity: 0.9;
+}
+
+/* ---------- Tarjeta ---------- */
+.item-inventario {
+  position: relative;
+  box-sizing: border-box;
+  padding: 20px 20px 22px;
+  text-align: center;
+  color: var(--gris-texto);
+  background: var(--blanco);
+  border: 3px solid var(--rosa-pastel);
+  border-radius: 24px;
+  box-shadow: 0 16px 32px rgba(194, 24, 91, 0.2);
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.item-inventario:hover {
+  border-color: var(--rosa-oscuro);
+}
+
+/* Franja superior en vez de badge flotante */
+.item-inventario::before {
+  content: '';
+  display: block;
+  height: 8px;
+  margin: -20px -20px 16px;
+  background: linear-gradient(90deg, var(--rosa-medio), var(--rosa-claro));
+}
+
+/* Favorito: se distingue con dorado sobre fondo rosado suave */
+.item-inventario.favorito {
+  background: var(--rosa-pastel);
+  border-color: var(--dorado);
+}
+
+.item-inventario.favorito::before {
+  background: linear-gradient(90deg, var(--dorado), #ffe29a);
+}
+
+.posicion-badge {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 3px 14px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--blanco);
+  background: var(--rosa-medio);
+  border-radius: 999px;
+}
+
+.item-inventario.favorito .posicion-badge {
+  background: var(--dorado);
+  color: var(--gris-texto);
+}
+
+.item-inventario img {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    #ffffff 0 38%,
+    rgba(249, 168, 212, 0.55) 39% 62%,
+    rgba(249, 168, 212, 0.2) 63% 100%
+  );
+}
+
+.item-inventario h4 {
+  margin: 12px 0 4px;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  font-size: 1.3rem;
+  text-transform: capitalize;
+  color: var(--rosa-oscuro);
+}
+
+.tipo {
+  display: inline-block;
+  margin: 0 0 16px;
+  padding: 4px 14px;
+  color: var(--rosa-oscuro);
+  font-weight: 500;
+  text-transform: capitalize;
+  background: var(--rosa-pastel);
+  border: 1px solid var(--rosa-claro);
+  border-radius: 10px;
+}
+
+/* ---------- Botones ---------- */
+.acciones {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.acciones button {
+  width: 100%;
+  padding: 11px 12px;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: transform 0.15s, background 0.15s, border-color 0.15s;
+}
+
+.acciones button:hover {
+  transform: scale(1.02);
+}
+
+.btn-marcar {
+  color: var(--rosa-oscuro);
+  background: var(--blanco);
+  border-color: var(--rosa-medio);
+}
+
+.btn-marcar:hover {
+  background: var(--rosa-pastel);
+}
+
+.btn-marcar.btn-fav {
+  color: var(--gris-texto);
+  background: var(--dorado);
+  border-color: var(--dorado);
+}
+
+.btn-eliminar {
+  color: var(--blanco);
+  background: var(--rosa-oscuro);
+}
+
+.btn-eliminar:hover {
+  background: #a01350;
+}
+
+/* ---------- Accesibilidad ---------- */
+.acciones button:focus-visible {
+  outline: 3px solid var(--rosa-oscuro);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .acciones button,
+  .acciones button:hover {
+    transition: none;
+    transform: none;
+  }
+}

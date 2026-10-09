@@ -1,0 +1,56 @@
+<div class="page-wrap card-surface">
+  @if (entrenadorActivo()) {
+    <p class="search-status">
+      Mochila activa de: <strong>{{ entrenadorActivo()?.nombreCompleto }}</strong>
+    </p>
+  } @else {
+    <p class="search-status">
+      No hay entrenador activo. Ve al formulario de registro para activarlo, socio.
+    </p>
+  }
+
+  <form (ngSubmit)="buscarPokemon()" class="field">
+    <label for="busqueda">Buscar Pokémon</label>
+    <input
+      id="busqueda"
+      name="busqueda"
+      type="text"
+      [(ngModel)]="busqueda"
+      placeholder="Ej: pikachu"
+    />
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary btn-block" [disabled]="cargando()">
+        {{ cargando() ? 'Escaneando...' : 'Buscar' }}
+      </button>
+    </div>
+  </form>
+
+  @if (mensajeError()) {
+    <div class="alert alert-error">{{ mensajeError() }}</div>
+  }
+
+  @if (pokemonActual(); as pokemon) {
+    <div class="search-result">
+      <div class="pokemon-card" [appResaltarTipoPokemon]="pokemon.type">
+        <img class="pokemon-sprite" [src]="pokemon.image" [alt]="pokemon.name" />
+        <div class="pokemon-name">{{ pokemon.name }}</div>
+        <div class="pokemon-types">
+          <span class="type-chip" [class]="'type-' + pokemon.type">
+            {{ pokemon.type.toUpperCase() }}
+          </span>
+        </div>
+        <p class="card-index">
+          Experiencia base: <strong>{{ pokemon.baseExperience }}</strong>
+        </p>
+        <button
+          type="button"
+          class="btn btn-primary btn-sm btn-block"
+          (click)="clickGuardar()"
+          [disabled]="!entrenadorActivo()"
+        >
+          Guardar en la mochila
+        </button>
+      </div>
+    </div>
+  }
+</div>

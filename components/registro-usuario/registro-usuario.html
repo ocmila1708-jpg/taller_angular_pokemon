@@ -1,0 +1,136 @@
+<div class="page-wrap card-surface">
+  <header>
+    <h2>Registro de entrenadores</h2>
+  </header>
+
+  <div class="register-layout">
+    <form (ngSubmit)="handleSubmit()" #f="ngForm">
+      <div class="field">
+        <label for="nombre">Nombre</label>
+        <input
+          id="nombre"
+          name="nombre"
+          type="text"
+          [(ngModel)]="formData.nombre"
+          placeholder="Ej: Joseph"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <label for="apellido">Apellido</label>
+        <input
+          id="apellido"
+          name="apellido"
+          type="text"
+          [(ngModel)]="formData.apellido"
+          placeholder="Ej: Martinez"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <label for="tipoDoc">Tipo de identificación</label>
+        <select id="tipoDoc" name="tipoDoc" [(ngModel)]="formData.tipoDoc" required>
+          <option value="">Seleccione una opción</option>
+          <option value="Cédula de Ciudadanía">Cédula de Ciudadanía</option>
+          <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
+          <option value="Registro Civil">Registro Civil</option>
+          <option value="Pasaporte">Pasaporte</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="dni">Número de identificación</label>
+        <input
+          id="dni"
+          name="dni"
+          type="text"
+          [(ngModel)]="formData.dni"
+          placeholder="Ej: 1020304050"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <label for="fechaNacimiento">Fecha de nacimiento</label>
+        <input
+          id="fechaNacimiento"
+          name="fechaNacimiento"
+          type="date"
+          [(ngModel)]="formData.fechaNacimiento"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <label for="correo">Correo electrónico</label>
+        <input
+          id="correo"
+          name="correo"
+          type="email"
+          [(ngModel)]="formData.correo"
+          placeholder="correo@ejemplo.com"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <label for="pais">País</label>
+        <select id="pais" name="pais" [(ngModel)]="formData.pais" required>
+          <option value="">Seleccionar</option>
+          <option value="Colombia">Colombia</option>
+          <option value="Chile">Chile</option>
+          <option value="Argentina">Argentina</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="ciudad">Ciudad</label>
+        <select id="ciudad" name="ciudad" [(ngModel)]="formData.ciudad" required>
+          <option value="">Seleccione una opción</option>
+          <option value="Bogotá">Bogotá</option>
+          <option value="Medellín">Medellín</option>
+          <option value="Cali">Cali</option>
+          <option value="Santiago">Santiago</option>
+          <option value="Buenos Aires">Buenos Aires</option>
+        </select>
+      </div>
+
+      <label class="checkbox-field">
+        <input
+          type="checkbox"
+          name="aceptaPolitica"
+          [(ngModel)]="formData.aceptaPolitica"
+          required
+        />
+        Acepto la política de tratamiento de datos.
+      </label>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary btn-block">
+          Enviar
+        </button>
+      </div>
+    </form>
+
+    @if (entrenadores().length > 0) {
+      <aside class="card-surface">
+        <h3>Cambiar entrenador</h3>
+        <div class="trainer-switch">
+          @for (user of entrenadores(); track user.id) {
+            <button
+              type="button"
+              (click)="seleccionarEntrenador(user)"
+              class="btn btn-sm"
+              [class.btn-primary]="entrenadorActivo()?.id === user.id"
+              [class.btn-secondary]="entrenadorActivo()?.id !== user.id"
+            >
+              {{ user.nombreCompleto }}
+            </button>
+          }
+        </div>
+      </aside>
+    }
+  </div>
+</div>

@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=DM+Sans:wght@400;500;700&display=swap');
+
+:host {
+  display: block;
+  --rosa-oscuro: #c2185b;
+  --rosa-medio: #ec4899;
+  --rosa-claro: #f9a8d4;
+  --rosa-pastel: #fce7f3;
+  --blanco: #ffffff;
+  --dorado: #ffd166;
+  --gris-texto: #4a2438;
+}
+
+/* ---------- Página ---------- */
+.registro {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 56px 20px 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  color: var(--gris-texto);
+  background:
+    radial-gradient(circle at 10% 6%, rgba(255, 255, 255, 0.4), transparent 42%),
+    radial-gradient(circle at 90% 92%, rgba(255, 255, 255, 0.3), transparent 46%),
+    linear-gradient(175deg, var(--rosa-claro), var(--rosa-medio));
+}
+
+.registro h1 {
+  margin: 0;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  text-align: center;
+  color: var(--blanco);
+  text-shadow: 0 2px 10px rgba(194, 24, 91, 0.35);
+}
+
+/* ---------- Formulario (tarjeta blanca, ya no "vidrio") ---------- */
+.form-registro {
+  width: min(100%, 440px);
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 36px 32px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  border-radius: 28px;
+  background: linear-gradient(160deg, var(--blanco), var(--rosa-pastel));
+  border: 1px solid var(--rosa-pastel);
+  box-shadow: 0 22px 44px rgba(194, 24, 91, 0.22);
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ancho-completo {
+  grid-column: 1 / -1;
+}
+
+.campo label {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--rosa-oscuro);
+}
+
+/* Antes: píldora completa. Ahora: fondo suave con solo borde inferior marcado */
+.campo input:not([type='checkbox']),
+.campo select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  font: inherit;
+  color: var(--gris-texto);
+  background: var(--rosa-pastel);
+  border: none;
+  border-bottom: 3px solid transparent;
+  border-radius: 12px 12px 0 0;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.campo input::placeholder {
+  color: #b3688f;
+}
+
+.campo input:focus,
+.campo select:focus {
+  background: var(--blanco);
+  border-bottom-color: var(--rosa-medio);
+}
+
+/* Error solo después de que la persona toca el campo */
+.campo input.ng-touched.ng-invalid:not([type='checkbox']),
+.campo select.ng-touched.ng-invalid {
+  border-bottom-color: #d81159;
+}
+
+/* ---------- Checkbox ---------- */
+.campo-check {
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.campo-check input {
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  accent-color: var(--rosa-medio);
+  cursor: pointer;
+}
+
+.campo-check label {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  color: var(--gris-texto);
+  cursor: pointer;
+}
+
+/* ---------- Botón ---------- */
+/* Antes: píldora aguamarina. Ahora: cuadrado redondeado con degradado y sombra rosa */
+.btn-enviar {
+  width: 100%;
+  padding: 14px 24px;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--blanco);
+  background: linear-gradient(120deg, var(--rosa-medio), var(--rosa-oscuro));
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
+}
+
+.btn-enviar:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 10px 24px rgba(194, 24, 91, 0.4);
+}
+
+.btn-enviar:focus-visible {
+  outline: 3px solid var(--rosa-oscuro);
+  outline-offset: 3px;
+}
+
+/* ---------- Usuario registrado ---------- */
+.usuario-registrado {
+  width: min(100%, 680px);
+  box-sizing: border-box;
+  padding: 28px 32px;
+  color: var(--gris-texto);
+  background: linear-gradient(160deg, var(--blanco), var(--rosa-pastel));
+  border: 3px solid var(--dorado);
+  border-radius: 28px;
+  box-shadow: 0 24px 50px rgba(194, 24, 91, 0.3);
+  animation: emerger 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+
+.usuario-registrado h2 {
+  margin: 0 0 16px;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: var(--rosa-oscuro);
+}
+
+.usuario-registrado p {
+  margin: 0;
+  padding: 10px 0;
+  border-top: 1px solid var(--rosa-pastel);
+}
+
+.usuario-registrado strong {
+  color: var(--rosa-medio);
+}
+
+@keyframes emerger {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Móvil ---------- */
+@media (max-width: 600px) {
+  .form-registro {
+    grid-template-columns: 1fr;
+    padding: 24px 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .usuario-registrado {
+    animation: none;
+  }
+  .btn-enviar,
+  .campo input,
+  .campo select {
+    transition: none;
+  }
+}
